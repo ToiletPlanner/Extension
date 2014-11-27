@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "Toilet Planner",
+  "description": "This extension allows you to check if a toilet is available and reserve it",
+  "version": "1.0",
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_popup": "html/popup.html"
+  },
+  "permissions": [
+    
+  ]
+}
