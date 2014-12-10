@@ -1,11 +1,18 @@
-var rooms = [];
-
 $(document).ready(function()
 {
 	$( '#tabs' ).tabs();
 	
 	queryRooms();
-	setInterval(queryRooms, 5000);
+	//setInterval(queryRooms, 5000);
+	
+	/*$("tr").hover(
+	function(){
+		console.log($(this).find(".status"));
+		$(this).find(".status").html("Reserveer");
+	},
+	function(){
+		$(this).find(".status").html("");
+	});*/
 });
 
 function queryRooms()
@@ -17,46 +24,26 @@ function queryRooms()
 			// JSON.parse does not evaluate the attacker's scripts.
 			console.log(xhr.responseText);
 			rooms = JSON.parse(xhr.responseText);
-			renderRooms();
+			renderRooms(rooms);
 		}
 	}
 	xhr.send();
 }
 
-/*function queryRooms()
-{
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/room", true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4) {
-			// JSON.parse does not evaluate the attacker's scripts.
-			console.log(xhr.responseText);
-			rooms = JSON.parse(xhr.responseText);
-			for (var i = 0; i < rooms.length; i++) {
-				queryRoomData(i);
-			}
-			renderRooms();
-		}
-	}
-	xhr.send();
-}
-
-function queryRoomData(id) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/roomstatus/" + rooms[id].id, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState == 4) {
-			rooms[id].status = JSON.parse(xhr.responseText)[0];
-		}
-	}
-	xhr.send();
-}*/
-
-function renderRooms()
+function renderRooms(rooms)
 {
 	target = $("#rooms");
 	target.empty();
 	rooms.forEach( function(room) {
 		target.append('<tr><td class="name">' + room.roomname + ' <div class="status status_' + room.status + '"></div></td></tr>');
+	});
+	
+	$("tr").hover(
+	function(){
+		console.log($(this).find(".status"));
+		$(this).find(".status").html("Reserveer");
+	},
+	function(){
+		$(this).find(".status").html("");
 	});
 }
