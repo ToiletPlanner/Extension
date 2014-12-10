@@ -1,8 +1,8 @@
 html, body
 {
 	margin: 0px;
-	min-width: 400px;
-	min-height: 100px;
+	min-width: 250px;
+	/*min-height: 100px;*/
 }
 
 table {
