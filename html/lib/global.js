@@ -1,16 +1,16 @@
-// create the root namespace and making sure we're not overwriting it
-var TOILETPLANNER = TOILETPLANNER || {};
+// create the root namespace and make sure we're not overwriting it
+var OCCUPIED = OCCUPIED || {};
  
 // create a general purpose namespace method
 // this will allow us to create namespace a bit easier
-TOILETPLANNER.createNamespace = function (namespace) 
+OCCUPIED.createNamespace = function (namespace) 
 {
     var nsparts = namespace.split(".");
-    var parent = TOILETPLANNER;
+    var parent = OCCUPIED;
  
     // we want to be able to include or exclude the root namespace 
     // So we strip it if it's in the namespace
-    if (nsparts[0] === "TOILETPLANNER") {
+    if (nsparts[0] === "OCCUPIED") {
         nsparts = nsparts.slice(1);
     }
  
@@ -33,6 +33,4 @@ TOILETPLANNER.createNamespace = function (namespace)
 };
 
 // Create persistence namespace
-TOILETPLANNER.createNamespace("TOILETPLANNER.PERSISTENCE");
-// LocalStorage key of the stored gender (temporary)
-TOILETPLANNER.PERSISTENCE.genderKey = "tpGender";
+OCCUPIED.createNamespace("OCCUPIED.PERSISTENCE");

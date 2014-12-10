@@ -1,28 +1,62 @@
+var rooms = [];
+
 $(document).ready(function()
 {
 	$( '#tabs' ).tabs();
-	initProfile();
 	
-	var t = new TOILETPLANNER.MODELS.Toilet("Male", 2, 3);
+	queryRooms();
+	setInterval(queryRooms, 5000);
 });
 
-function initProfile() 
+function queryRooms()
 {
-	var ddlGender = $( '#gender' );
-	ddlGender.append(new Option(TOILETPLANNER.MODELS.Gender.MALE.name, TOILETPLANNER.MODELS.Gender.MALE.abbrev))
-			.append(new Option(TOILETPLANNER.MODELS.Gender.FEMALE.name, TOILETPLANNER.MODELS.Gender.FEMALE.abbrev))
-			.change(selectGender);
-			
-	var gender = localStorage.getItem(TOILETPLANNER.PERSISTENCE.genderKey);
-	if (gender) {
-		$( '#gender' ).val(gender);
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/allroomstatus", true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			// JSON.parse does not evaluate the attacker's scripts.
+			console.log(xhr.responseText);
+			rooms = JSON.parse(xhr.responseText);
+			renderRooms();
+		}
 	}
+	xhr.send();
 }
 
-function selectGender() {
-	var gender = $(this).val();
-	if (gender) 
-		localStorage.setItem(TOILETPLANNER.PERSISTENCE.genderKey, gender);
-	else
-		localStorage.removeItem(TOILETPLANNER.PERSISTENCE.genderKey);
+/*function queryRooms()
+{
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/room", true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			// JSON.parse does not evaluate the attacker's scripts.
+			console.log(xhr.responseText);
+			rooms = JSON.parse(xhr.responseText);
+			for (var i = 0; i < rooms.length; i++) {
+				queryRoomData(i);
+			}
+			renderRooms();
+		}
+	}
+	xhr.send();
+}
+
+function queryRoomData(id) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/roomstatus/" + rooms[id].id, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4) {
+			rooms[id].status = JSON.parse(xhr.responseText)[0];
+		}
+	}
+	xhr.send();
+}*/
+
+function renderRooms()
+{
+	target = $("#rooms");
+	target.empty();
+	rooms.forEach( function(room) {
+		target.append('<tr><td class="name">' + room.roomname + ' <div class="status status_' + room.status + '"></div></td></tr>');
+	});
 }
