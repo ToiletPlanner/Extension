@@ -13,7 +13,7 @@ table {
 	animation: float 5s infinite;
 }
 
-th {
+th, header {
 	background: steelblue;
 	height: 54px;
 	width: 100%;
@@ -24,6 +24,7 @@ th {
 	box-shadow: inset 0px 1px 2px #568ebd;
 	transition: all 0.2s;
 	font-size: 18px;
+	text-align: center;
 }
 
 tr {
@@ -116,4 +117,53 @@ tr:hover td {
 tr:hover .status_1 {
 	background-color: #64C518;
 }
- 
+
+h1 {
+	font-size: 1em;
+}
+
+#reservation {
+	background-color: #EFEFEF;
+}
+
+#reservation > form {
+	width: 95%;
+	margin: 0 auto;
+}
+
+#reservation label {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#reservation input[type=text], #reservation input[type=time], #reservation input[type=date], #reservation input[type=number], #reservation input[type=submit], #reservation input[type=cancel] {
+	width: 100%;
+	padding: 10px;
+	border: none;
+	transition: border 0.3s;
+	box-sizing: border-box;
+}
+
+#reservation input[type=text], #reservation input[type=time], #reservation input[type=date], #reservation input[type=number] {
+	border-bottom: 3px solid #c9c9c9;
+}
+
+#reservation input[type=submit], #reservation input[type=cancel] {
+	background-color: #4040CF;
+	border-bottom: 3px solid #3030BE;
+	color: #FFF;
+	font-weight: bold;
+}
+
+#reservation input:hover {
+	background-color: #FDF7E5;
+}
+
+#reservation input[type=text]:focus, #reservation input[type=time]:focus, #reservation input[type=date]:focus, #reservation input[type=number]:focus {
+	border-bottom: 3px solid #969696;
+}
+
+#reservation input[type=submit]:hover, #reservation input[type=cancel]:hover {
+	background-color: #4040CF;
+	border-bottom: 3px solid #3030BE;
+}

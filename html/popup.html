@@ -10,12 +10,23 @@
 		<link href="style/style.css" rel="stylesheet" />
 	</head>
 	<body>
-		<table>
-			<thead>
-				<tr>
-					<th>Rooms</th>
-				</tr>
-			</thead>
+		<header>
+			<h1>Rooms</h1>
+		</header>
+		<div id="reservation" style="display: none;">
+		<form>
+			<label for="date">Date</label><br />
+			<input type="date" name="date" id="date" /><br />
+			<label for="time">Starting time</label><br />
+			<input type="time" name="time" id="time" /><br />
+			<label for="length">Duration (Hours : Minutes)</label><br />
+			<input type="time" id="length" name="length" />
+			<br />
+			<br />
+			<input type="submit" id="reserveer" name="reserveer" value="Reserveer" />
+		</form>
+		</div>
+		<table id="roomtable">
 			<tbody id="rooms">
 			</tbody>
 		</table>

@@ -3,22 +3,15 @@ $(document).ready(function()
 	$( '#tabs' ).tabs();
 	
 	queryRooms();
-	//setInterval(queryRooms, 5000);
-	
-	/*$("tr").hover(
-	function(){
-		console.log($(this).find(".status"));
-		$(this).find(".status").html("Reserveer");
-	},
-	function(){
-		$(this).find(".status").html("");
-	});*/
+	setInterval(queryRooms, 5000);
 });
 
 function queryRooms()
 {
 	var xhr = new XMLHttpRequest();
+	//xhr.open("GET", "http://jsonpwrapper.com/?urls%5B%5D=http%3A%2F%2Foccupied.dptechnics.com%2Fapi%2Fallroomstatus", true);
 	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/allroomstatus", true);
+	//xhr.open("GET", "https://jsonp.nodejitsu.com/?callback=myCallback&url=http://occupied.dptechnics.com/api/allroomstatus", true);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			// JSON.parse does not evaluate the attacker's scripts.
@@ -46,4 +39,13 @@ function renderRooms(rooms)
 	function(){
 		$(this).find(".status").html("");
 	});
+	
+	$(".status").click(openReservationPage);
+}
+
+function openReservationPage()
+{
+	$("#roomtable").hide();
+	$("header > h1").html("Reservation");
+	$("#reservation").show();
 }
