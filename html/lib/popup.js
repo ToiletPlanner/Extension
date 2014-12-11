@@ -4,6 +4,8 @@ $(document).ready(function()
 	
 	queryRooms();
 	setInterval(queryRooms, 5000);
+	
+	$("#reserve").click(reserve);
 });
 
 function queryRooms()
@@ -33,7 +35,6 @@ function renderRooms(rooms)
 	
 	$("tr").hover(
 	function(){
-		console.log($(this).find(".status"));
 		$(this).find(".status").html("Reserveer");
 	},
 	function(){
@@ -45,7 +46,14 @@ function renderRooms(rooms)
 
 function openReservationPage()
 {
-	$("#roomtable").hide();
 	$("header > h1").html("Reservation");
+	$("#roomtable").hide();
 	$("#reservation").show();
+}
+
+function reserve()
+{
+	$("header > h1").html("Rooms");
+	$("#reservation").hide();
+	$("#roomtable").show();
 }
