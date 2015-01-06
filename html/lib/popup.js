@@ -1,23 +1,19 @@
 $(document).ready(function()
 {
 	$( '#tabs' ).tabs();
+	$("#reserve").click(reserve);
 	
 	queryRooms();
 	setInterval(queryRooms, 5000);
-	
-	$("#reserve").click(reserve);
 });
 
 function queryRooms()
 {
 	var xhr = new XMLHttpRequest();
-	//xhr.open("GET", "http://jsonpwrapper.com/?urls%5B%5D=http%3A%2F%2Foccupied.dptechnics.com%2Fapi%2Fallroomstatus", true);
 	xhr.open("GET", "http://www.corsproxy.com/occupied.dptechnics.com/api/allroomstatus", true);
-	//xhr.open("GET", "https://jsonp.nodejitsu.com/?callback=myCallback&url=http://occupied.dptechnics.com/api/allroomstatus", true);
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
 			// JSON.parse does not evaluate the attacker's scripts.
-			console.log(xhr.responseText);
 			rooms = JSON.parse(xhr.responseText);
 			renderRooms(rooms);
 		}
